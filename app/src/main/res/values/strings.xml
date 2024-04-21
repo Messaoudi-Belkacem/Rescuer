@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Rescuer</string>
+    <string name="app_description">
+        Rescuer is a mobile application designed to provide essential first aid instructions for common warzone injuries
+        With a focus on simplicity and accessibility, Rescuer equips users with step-by-step guidance on how to administer immediate medical assistance in high-stress environments
+        From gunshot wounds to severe bleeding and burns, Rescuer aims to empower individuals with the knowledge and skills needed to effectively respond to emergency situations and potentially save lives
+    </string>
+</resources>
