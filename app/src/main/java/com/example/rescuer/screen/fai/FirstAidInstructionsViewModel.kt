@@ -21,13 +21,16 @@ class FirstAidInstructionsViewModel(
     application: Application
 ) : ViewModel() {
 
+    private val _symptomsList = mutableListOf<String>()
+    val symptomsList: List<String> = _symptomsList
+
     private val tag: String = "FirstAidInstructionsViewModel.kt"
     private val appContext: Context = application.applicationContext
 
     private val _generateState = mutableStateOf<GenerateState>(GenerateState.Initial)
     val generateState: State<GenerateState> = _generateState
 
-    private val _responseInstructions = mutableStateOf(Instructions(mutableListOf()))
+    private val _responseInstructions = mutableStateOf(Instructions(mutableMapOf()))
     val responseInstructions: State<Instructions> = _responseInstructions
 
     fun generateInstructions(injuries: String) {
@@ -41,11 +44,11 @@ class FirstAidInstructionsViewModel(
                 val keyWords = parseStringToList(injuries)
                 val response = offLineExpertSystem.generateInstructions(keyWords)
                 delay(5000)
-                if (response.instructionsList.isNotEmpty()) {
+                if (response.instructionsMap.isNotEmpty()) {
                     _generateState.value = GenerateState.Success
                     _responseInstructions.value = response
                 } else {
-                    Log.d(tag, response.instructionsList.toString())
+                    Log.d(tag, response.instructionsMap.toString())
                     _generateState.value = GenerateState.Error("Generating results failed. Please try again.")
                 }
                 /*if (response.isSuccessful) {
@@ -82,6 +85,10 @@ class FirstAidInstructionsViewModel(
 
     private fun parseStringToList(input: String): List<String> {
         return input.split("\\s+".toRegex())
+    }
+
+    fun addSymptom(string: String) {
+        _symptomsList.add(string)
     }
 
 }

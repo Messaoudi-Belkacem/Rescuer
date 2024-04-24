@@ -15,12 +15,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,15 +33,14 @@ import androidx.navigation.NavController
 import com.example.compose.md_theme_light_primary
 import com.example.darckoum.data.state.GenerateState
 import com.example.rescuer.R
+import com.example.rescuer.data.model.enum_classes.InjuryLocation
 import com.example.rescuer.navigation.Screen
 
 @Composable
 fun FirstAidInstructionsScreen1(navController: NavController, firstAidInstructionsViewModel: FirstAidInstructionsViewModel) {
     val fontFamily = FontFamily(Font(R.font.roboto))
-    val searchState = remember { mutableStateOf("") }
     val generateState by firstAidInstructionsViewModel.generateState
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
     Scaffold(
 
@@ -123,6 +120,7 @@ fun FirstAidInstructionsScreen1(navController: NavController, firstAidInstructio
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(
                             onClick = {
+                                firstAidInstructionsViewModel.addSymptom(InjuryLocation.HEAD.remoteName)
                                 navController.navigate(Screen.FirstAidInstructions2.route)
                             },
                             modifier = Modifier
@@ -138,6 +136,7 @@ fun FirstAidInstructionsScreen1(navController: NavController, firstAidInstructio
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(
                             onClick = {
+                                firstAidInstructionsViewModel.addSymptom(InjuryLocation.CHEST.remoteName)
                                 navController.navigate(Screen.FirstAidInstructions2.route)
                             },
                             modifier = Modifier
@@ -153,6 +152,7 @@ fun FirstAidInstructionsScreen1(navController: NavController, firstAidInstructio
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(
                             onClick = {
+                                firstAidInstructionsViewModel.addSymptom(InjuryLocation.ABDOMEN.remoteName)
                                 navController.navigate(Screen.FirstAidInstructions2.route)
                             },
                             modifier = Modifier
@@ -168,6 +168,7 @@ fun FirstAidInstructionsScreen1(navController: NavController, firstAidInstructio
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(
                             onClick = {
+                                firstAidInstructionsViewModel.addSymptom(InjuryLocation.LIMBS.remoteName)
                                 navController.navigate(Screen.FirstAidInstructions2.route)
                             },
                             modifier = Modifier
