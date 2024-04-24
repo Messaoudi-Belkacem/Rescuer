@@ -144,7 +144,22 @@ fun FirstAidInstructionsScreen1(navController: NavController, firstAidInstructio
                                 .fillMaxWidth(1f)
                         ) {
                             Text(
-                                text = "Torso",
+                                text = "Chest",
+                                fontSize = 20.sp,
+                                fontFamily = fontFamily,
+                                modifier = Modifier
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Button(
+                            onClick = {
+                                navController.navigate(Screen.FirstAidInstructions2.route)
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth(1f)
+                        ) {
+                            Text(
+                                text = "Abdomen",
                                 fontSize = 20.sp,
                                 fontFamily = fontFamily,
                                 modifier = Modifier
