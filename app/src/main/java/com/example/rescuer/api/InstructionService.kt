@@ -5,8 +5,8 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface InstructionService {
-    @GET("announcements")
+    @GET("first-aid")
     suspend fun getInstructions(): Response<List<Instructions>>
-    @GET("announcements/{announcementId}")
+    @GET("first-aid/{symptoms}")
     suspend fun getInstruction(): Response<Instructions>
 }

@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import java.net.ConnectException
 
 class FirstAidInstructionsViewModel(
+    private val repository: Repository,
     private val offLineExpertSystem: OffLineExpertSystem,
     application: Application
 ) : ViewModel() {

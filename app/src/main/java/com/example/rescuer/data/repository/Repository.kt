@@ -8,7 +8,11 @@ class Repository {
 
     private val tag = "Repository.kt"
 
-    suspend fun getInstructions(): Response<Instructions> {
+    suspend fun getInstructions(): Response<List<Instructions>> {
+        return RetrofitInstance.instructionService.getInstructions()
+    }
+
+    suspend fun getInstruction(): Response<Instructions> {
         return RetrofitInstance.instructionService.getInstruction()
     }
 
