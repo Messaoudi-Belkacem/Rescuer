@@ -11,5 +11,5 @@ interface InstructionService {
     @GET("first-aid")
     suspend fun getInstruction(
         @Query("symptoms") symptoms: List<String>
-    ): Response<Instructions>
+    ): Response<List<Map<String, String>>>
 }

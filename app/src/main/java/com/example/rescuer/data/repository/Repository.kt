@@ -12,8 +12,8 @@ class Repository {
         return RetrofitInstance.instructionService.getInstructions()
     }
 
-    suspend fun getInstruction(): Response<Instructions> {
-        return RetrofitInstance.instructionService.getInstruction()
+    suspend fun getInstructionsBySymptoms(symptoms: List<String>): Response<List<Map<String, String>>> {
+        return RetrofitInstance.instructionService.getInstruction(symptoms)
     }
 
 }

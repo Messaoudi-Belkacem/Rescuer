@@ -1,5 +1,5 @@
 package com.example.rescuer.data.model
 
 data class Instructions(
-    val instructionsMap: MutableMap<String, String>
+    val instructionsList: MutableList<Map<String, String>>
 )

@@ -5,7 +5,7 @@ import java.util.*
 
 class OffLineExpertSystem {
 
-    fun generateInstructions(keyWords: List<String>): Instructions {
+    /*fun generateInstructions(keyWords: List<String>): Instructions {
         // Define the knowledge base
         val kb = mutableMapOf<String, Boolean>()
 
@@ -144,6 +144,6 @@ class OffLineExpertSystem {
         }
 
         return Instructions(instructionList)
-    }
+    }*/
 
 }

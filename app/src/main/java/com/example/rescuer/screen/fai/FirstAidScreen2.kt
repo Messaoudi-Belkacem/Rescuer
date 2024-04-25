@@ -15,7 +15,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,14 +34,15 @@ import androidx.navigation.NavController
 import com.example.compose.md_theme_light_primary
 import com.example.darckoum.data.state.GenerateState
 import com.example.rescuer.R
+import com.example.rescuer.data.model.enum_classes.InjuryType
 
 @Composable
 fun FirstAidInstructionsScreen2(navController: NavController, firstAidInstructionsViewModel: FirstAidInstructionsViewModel) {
     val fontFamily = FontFamily(Font(R.font.roboto))
-    val searchState = remember { mutableStateOf("") }
+    remember { mutableStateOf("") }
     val generateState by firstAidInstructionsViewModel.generateState
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
+    rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
     Scaffold(
 
@@ -122,7 +122,8 @@ fun FirstAidInstructionsScreen2(navController: NavController, firstAidInstructio
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(
                             onClick = {
-                                firstAidInstructionsViewModel.generateInstructions(searchState.value)
+                                firstAidInstructionsViewModel.addSymptom(InjuryType.GUNSHOT_WOUND.remoteName)
+                                firstAidInstructionsViewModel.generateInstructions()
                             },
                             modifier = Modifier
                                 .fillMaxWidth(1f)
@@ -137,7 +138,8 @@ fun FirstAidInstructionsScreen2(navController: NavController, firstAidInstructio
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(
                             onClick = {
-                                firstAidInstructionsViewModel.generateInstructions(searchState.value)
+                                firstAidInstructionsViewModel.addSymptom(InjuryType.BLAST_INJURY.remoteName)
+                                firstAidInstructionsViewModel.generateInstructions()
                             },
                             modifier = Modifier
                                 .fillMaxWidth(1f)
@@ -152,43 +154,14 @@ fun FirstAidInstructionsScreen2(navController: NavController, firstAidInstructio
                         Spacer(modifier = Modifier.height(20.dp))
                         Button(
                             onClick = {
-                                firstAidInstructionsViewModel.generateInstructions(searchState.value)
+                                firstAidInstructionsViewModel.addSymptom(InjuryType.BURN_INJURY.remoteName)
+                                firstAidInstructionsViewModel.generateInstructions()
                             },
                             modifier = Modifier
                                 .fillMaxWidth(1f)
                         ) {
                             Text(
                                 text = "Burn Injury",
-                                fontSize = 20.sp,
-                                fontFamily = fontFamily,
-                                modifier = Modifier
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(20.dp))
-                        Button(
-                            onClick = {
-                                firstAidInstructionsViewModel.generateInstructions(searchState.value)
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth(1f)
-                        ) {
-                            Text(
-                                text = "Sharp Force Injury",
-                                fontSize = 20.sp,
-                                fontFamily = fontFamily,
-                                modifier = Modifier
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(20.dp))
-                        Button(
-                            onClick = {
-                                firstAidInstructionsViewModel.generateInstructions(searchState.value)
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth(1f)
-                        ) {
-                            Text(
-                                text = "Crush Injury",
                                 fontSize = 20.sp,
                                 fontFamily = fontFamily,
                                 modifier = Modifier

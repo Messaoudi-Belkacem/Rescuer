@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.AppTheme
 import com.example.rescuer.data.OffLineExpertSystem
+import com.example.rescuer.data.repository.Repository
 import com.example.rescuer.navigation.Screen
 import com.example.rescuer.navigation.SetupNavGraph
 import com.example.rescuer.screen.fai.FirstAidInstructionsViewModel
@@ -32,8 +33,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val offLineExpertSystem = OffLineExpertSystem()
+        
+        val repository = Repository()
 
-        val firstAidInstructionsViewModelFactory = FirstAidInstructionsViewModelFactory(offLineExpertSystem, application)
+        val firstAidInstructionsViewModelFactory = FirstAidInstructionsViewModelFactory(repository = repository, offLineExpertSystem = offLineExpertSystem, application)
 
         firstAidInstructionsViewModel = ViewModelProvider(this, firstAidInstructionsViewModelFactory)[FirstAidInstructionsViewModel::class.java]
 

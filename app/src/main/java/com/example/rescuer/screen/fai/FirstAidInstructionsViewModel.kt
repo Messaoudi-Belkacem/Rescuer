@@ -11,7 +11,6 @@ import com.example.darckoum.data.state.GenerateState
 import com.example.rescuer.data.OffLineExpertSystem
 import com.example.rescuer.data.model.Instructions
 import com.example.rescuer.data.repository.Repository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.net.ConnectException
 
@@ -21,7 +20,7 @@ class FirstAidInstructionsViewModel(
     application: Application
 ) : ViewModel() {
 
-    private val _symptomsList = mutableListOf<String>()
+    private val _symptomsList = mutableListOf("Injured(x)")
     val symptomsList: List<String> = _symptomsList
 
     private val tag: String = "FirstAidInstructionsViewModel.kt"
@@ -30,29 +29,16 @@ class FirstAidInstructionsViewModel(
     private val _generateState = mutableStateOf<GenerateState>(GenerateState.Initial)
     val generateState: State<GenerateState> = _generateState
 
-    private val _responseInstructions = mutableStateOf(Instructions(mutableMapOf()))
-    val responseInstructions: State<Instructions> = _responseInstructions
+    private val _responseInstructions = mutableStateOf(Instructions(mutableListOf()))
+    var responseInstructions: State<Instructions> = _responseInstructions
 
-    fun generateInstructions(injuries: String) {
+    fun generateInstructions() {
         viewModelScope.launch {
             try {
-                if (injuries.isBlank()) {
-                    _generateState.value = GenerateState.Error("Please fill in all fields")
-                    return@launch
-                }
-                _generateState.value = GenerateState.Loading
-                val keyWords = parseStringToList(injuries)
-                val response = offLineExpertSystem.generateInstructions(keyWords)
-                delay(5000)
-                if (response.instructionsMap.isNotEmpty()) {
+                val response = repository.getInstructionsBySymptoms(_symptomsList)
+                if (response.isSuccessful) {
                     _generateState.value = GenerateState.Success
-                    _responseInstructions.value = response
-                } else {
-                    Log.d(tag, response.instructionsMap.toString())
-                    _generateState.value = GenerateState.Error("Generating results failed. Please try again.")
-                }
-                /*if (response.isSuccessful) {
-                    _generateState.value = GenerateState.Success
+                    _responseInstructions.value = Instructions(response.body()!!.toMutableList())
                     Log.d(tag, "response was successful")
                     Log.d(tag, "response: " + response.body().toString())
                 } else {
@@ -64,13 +50,14 @@ class FirstAidInstructionsViewModel(
                         "response error body (to string): " + (response.errorBody().toString())
                     )
                     Log.d(tag, "response code: " + (response.code().toString()))
-                }*/
+                }
             } catch (e: ConnectException) {
                 Log.d(
                     tag,
                     "Failed to connect to the server. Please check your internet connection."
                 )
                 _generateState.value = GenerateState.Error("An error occurred during Login")
+                e.printStackTrace()
             } catch (e: Exception) {
                 Log.d(tag, "An unexpected error occurred.")
                 e.printStackTrace()
