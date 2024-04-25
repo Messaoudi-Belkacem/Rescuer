@@ -35,6 +35,7 @@ import com.example.compose.md_theme_light_primary
 import com.example.darckoum.data.state.GenerateState
 import com.example.rescuer.R
 import com.example.rescuer.data.model.enum_classes.InjuryType
+import com.example.rescuer.navigation.Screen
 
 @Composable
 fun FirstAidInstructionsScreen2(navController: NavController, firstAidInstructionsViewModel: FirstAidInstructionsViewModel) {
@@ -82,8 +83,7 @@ fun FirstAidInstructionsScreen2(navController: NavController, firstAidInstructio
                 }
 
                 is GenerateState.Success -> {
-                    /*navController.navigate(Screen.Main.route)*/
-                    showBottomSheet = true
+                    navController.navigate(Screen.Results.route)
                 }
 
                 is GenerateState.Error -> {

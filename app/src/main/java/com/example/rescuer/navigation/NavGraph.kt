@@ -13,6 +13,7 @@ import com.example.rescuer.screen.fai.FirstAidInstructionsScreen
 import com.example.rescuer.screen.fai.FirstAidInstructionsScreen1
 import com.example.rescuer.screen.fai.FirstAidInstructionsScreen2
 import com.example.rescuer.screen.fai.FirstAidInstructionsViewModel
+import com.example.rescuer.screen.fai.ResultScreen
 
 @Composable
 fun SetupNavGraph(
@@ -56,6 +57,11 @@ fun SetupNavGraph(
             route = Screen.FirstAidInstructions2.route,
         ) {
             FirstAidInstructionsScreen2(navController, firstAidInstructionsViewModel)
+        }
+        composable(
+            route = Screen.Results.route,
+        ) {
+            ResultScreen(navController, firstAidInstructionsViewModel)
         }
         composable(
             route = Screen.About.route,
